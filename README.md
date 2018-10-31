@@ -26,14 +26,18 @@ When downloading Docker on Windows and Mac it will also download kubernetes
 ### Download Kubernetes
 Follow the instructions here https://kubernetes.io/docs/getting-started-guides/ubuntu/
 
+### Download Kubeadm
+Follow the insturctions here https://kubernetes.io/docs/setup/independent/install-kubeadm/
+
 ### Download ksonnet
 Follow the instructions here https://github.com/ksonnet/ksonnet
 
 ### Download Kubeflow
 As detailed in the below instructions
 
-### Starting Kubernetes Cluster
-Master Node: Run the following code:
+# Starting Kubernetes Cluster
+## Master Node:
+Run the following code:
 
 
 
@@ -76,7 +80,22 @@ Apply your pod network (flannel)
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
 ```
+## Worker Node:
+```bash
+sudo apt-get update \
+  && sudo apt-get install -y \
+  kubelet \
+  kubeadm \
+  kubernetes-cni
+```
 
+Join the cluster with whatever Token provided above
+
+```bash
+kubeadm join --token f2292a.77a85956eb6acbd6 10.100.195.129:6443 --discovery-token-ca-cert-hash sha256:0c4890b8d174078072545ef17f295a9badc5e2041dc68c419880cca93d084098
+```
+
+## Client or Master:
 Run this code on either the master or the client node
 
 ```bash
@@ -132,3 +151,4 @@ kubectl port-forward --namespace=${NAMESPACE} $PODNAME 8000:8000
 For kubernetes dashboard
 ```bash
 ```
+## Worker Node:
