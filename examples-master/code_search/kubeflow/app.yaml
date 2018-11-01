@@ -1,0 +1,20 @@
+apiVersion: 0.2.0
+kind: ksonnet.io/app
+libraries:
+  examples:
+    name: examples
+    registry: kubeflow
+    version: defc235463799d5600001ee0ed6ef68f7af24a17
+  tf-serving:
+    name: tf-serving
+    registry: kubeflow
+    version: ab6084349673e6405ae486eb3be2141e3550643c
+name: kubeflow
+registries:
+  incubator:
+    protocol: github
+    uri: github.com/ksonnet/parts/tree/master/incubator
+  kubeflow:
+    protocol: github
+    uri: https://github.com/kubeflow/kubeflow/tree/master/kubeflow
+version: 0.0.1
