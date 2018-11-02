@@ -110,7 +110,7 @@ kubeadm join --token f2292a.77a85956eb6acbd6 10.100.195.129:6443 --discovery-tok
 ```
 
 Viusalizing nodes:
-![Nodes(./Images/Nodes.png)
+![Nodes](./Images/Nodes.png)
 
 #### Once the master and worker nodes are set there is not much additional to do on the above and the rest is just adding and configuring the containers on the cluster.
 
