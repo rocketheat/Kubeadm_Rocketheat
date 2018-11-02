@@ -1,4 +1,4 @@
-# Creating Kubernetes Cluster with Kubeadm and Using Seldon to Serve Keras Machine Learning Algorithm on the Cluster.
+# Creating Kubernetes Cluster with Kubeadm and Using Ksonnet/Seldon to Serve Keras Machine Learning Algorithm on the Cluster, Monitor Model Perfomance with Seldon Analytics, and Distributed Train Models with Jupyter Hub.
 
 The Final design of the cluster is as follow:
 
