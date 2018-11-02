@@ -267,6 +267,9 @@ If you run the api as simple docker container you can use the following
 curl -H "Content-Type: application/x-www-form-urlencoded" -d 'json={"data":{"tensor":{"shape":[1,2],"values":[1,3]}}}' http://localhost:8002/seldon/mytestserving/api/v0.1/predictions
 ```
 
+Example Query
+![API](./Images/API.png)
+
 ## Seldon-Core Analytics
 There is a powerful seldon core analytics that you can use to monitor perfomance of all models, cluster, memory....
 
