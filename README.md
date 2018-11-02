@@ -109,6 +109,9 @@ example:
 kubeadm join --token f2292a.77a85956eb6acbd6 10.100.195.129:6443 --discovery-token-ca-cert-hash sha256:0c4890b8d174078072545ef17f295a9badc5e2041dc68c419880cca93d084098
 ```
 
+Viusalizing nodes:
+![Nodes(./Images/Nodes.png)
+
 #### Once the master and worker nodes are set there is not much additional to do on the above and the rest is just adding and configuring the containers on the cluster.
 
 ## Client or Master:
@@ -184,6 +187,8 @@ Run the following codes to start jupyter hub
 PODNAME=`kubectl get pods --namespace=${NAMESPACE} --selector="app=tf-hub" --output=template --template="{{with index .items 0}}{{.metadata.name}}{{end}}"`
 kubectl port-forward --namespace=${NAMESPACE} $PODNAME 8000:8000
 ```
+Visualizing Jupyter hub
+![Jupyter Hub](./Images/JupyterHub.png)
 
 To create the docker image you can use seldon wrapper using the ksonnet packaging system.
 
@@ -192,6 +197,9 @@ ks pkg install kubeflow/seldon
 ks generate seldon seldon
 ks apply default -c seldon --namespace Kubeflow
 ```
+
+Visualizing cluster details:
+![Cluster Details](./Images/Details.png)
 
 Once you download seldon using ksonnet and through kubeflow you can build the docker image as follow (for further details check the following https://github.com/kubeflow/examples/tree/master/xgboost_ames_housing):
 1. Create a folder with three files: prediction file, the saved keras model, and requirements file. An example here is the Example_Folder where testServing is the prediction file, test_model.h5 is the saved keras model, and requirements.txt is the python library requirements.
@@ -283,6 +291,8 @@ Link:
 http://localhost:3000/dashboard/db/prediction-analytics?refresh=5s&orgId=1
 
 Username admin, and password password
+
+![Seldon-Core Analytics](./Images/seldon-analytics.png)
 
 #### Additional helper codes:
 unbind port already in use
