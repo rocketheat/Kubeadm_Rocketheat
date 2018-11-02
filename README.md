@@ -185,10 +185,6 @@ PODNAME=`kubectl get pods --namespace=${NAMESPACE} --selector="app=tf-hub" --out
 kubectl port-forward --namespace=${NAMESPACE} $PODNAME 8000:8000
 ```
 
-For kubernetes dashboard
-```bash
-```
-
 To create the docker image you can use seldon wrapper using the ksonnet packaging system.
 
 ```bash
@@ -199,7 +195,7 @@ ks apply default -c seldon --namespace Kubeflow
 
 Once you download seldon using ksonnet and through kubeflow you can build the docker image as follow (for further details check the following https://github.com/kubeflow/examples/tree/master/xgboost_ames_housing):
 1. Create a folder with three files: prediction file, the saved keras model, and requirements file. An example here is the Example_Folder where testServing is the prediction file, test_model.h5 is the saved keras model, and requirements.txt is the python library requirements.
-2. Build the image with the help of seldon.
+2. Build the image with the help of seldon (https://github.com/SeldonIO/seldon-core).
 3. You have now an image that is ready to deploy on kubernetes.
 
 For the testServing file you only need to load the model and and return the prediction as follow:
@@ -263,7 +259,32 @@ If you run the api as simple docker container you can use the following
 curl -H "Content-Type: application/x-www-form-urlencoded" -d 'json={"data":{"tensor":{"shape":[1,2],"values":[1,3]}}}' http://localhost:8002/seldon/mytestserving/api/v0.1/predictions
 ```
 
-Additional helper codes:
+## Seldon-Core Analytics
+There is a powerful seldon core analytics that you can use to monitor perfomance of all models, cluster, memory....
+
+You will need to download helm. You can get more details here: https://github.com/helm/helm
+
+``bash
+brew install kubernetes-helm
+```
+
+To download the dashboard you can follow the information here:
+```bashrc
+helm install seldon-core-analytics --name seldon-core-analytics \
+     --repo https://storage.googleapis.com/seldon-charts \
+     --set grafana_prom_admin_password=password \
+     --set persistence.enabled=false \
+```
+and to run locally
+```bash
+kubectl port-forward $(kubectl get pods -l app=grafana-prom-server -o jsonpath='{.items[0].metadata.name}') 3000:3000
+```
+Link:
+http://localhost:3000/dashboard/db/prediction-analytics?refresh=5s&orgId=1
+
+Username admin, and password password
+
+#### Additional helper codes:
 unbind port already in use
 ```bash
 lsof -ti:8002 | xargs kill -9
