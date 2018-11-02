@@ -2,20 +2,20 @@ apiVersion: v1
 kind: Pod
 
 metadata:
-  name: xgboost
+  name: xgboost1
   labels:
     team: platform
 
 spec:
   containers:
   - name: xgboost
-    image: gcr.io/cloudmlplat/ames-housing:v1
+    image: rocketheat/ames-housing:v1
     volumeMounts:
     - mountPath: "/mnt/xgboost"
       name: datadir
     args:
       - --train-input
-      - /mnt/xgboost/ames_dataset/train.csv
+      - /mnt/xgboost/all/train.csv
       - --model-file
       - /mnt/xgboost/housing.dat
       - --learning-rate

@@ -40,6 +40,15 @@ As detailed in the below instructions
 ## Master Node:
 Run the following code:
 
+sudo swapoff -a
+
+## Obtain admin.conf info:
+scp root@<master ip>:/etc/kubernetes/admin.conf .
+
+```bash
+scp root@10.0.10.107:/etc/kubernetes/admin.conf .
+export KUBECONFIG=~/Documents/Kubernetes/my-kubeflow/admin.conf
+```
 
 
 ```bash
@@ -101,7 +110,7 @@ Run this code on either the master or the client node
 
 ```bash
 # Create a namespace for kubeflow deployment
-NAMESPACE=kubeflow
+  NAMESPACE=kubeflow
 kubectl create namespace ${NAMESPACE}
 
 # Which version of Kubeflow to use
@@ -153,3 +162,53 @@ For kubernetes dashboard
 ```bash
 ```
 ## Worker Node:
+
+
+## XGBoost Housing Prices:
+Two paths to generate models:
+1. jupyter hub
+
+2. Run through a docker container
+```
+IMAGE_NAME=ames-housing
+VERSION=v1
+```
+```
+docker build -t rocketheat/${IMAGE_NAME}:${VERSION} .
+```
+
+```
+docker push rocketheat/${IMAGE_NAME}:${VERSION}
+```
+
+To persist the data run the following
+```
+kubectl create -f py-volume.yaml
+kubectl create -f py-claim.yaml
+```
+
+To train the model run the following
+```
+kubectl create -f py-pod.yaml
+```
+
+docker run -v ~/Documents/Kubernetes/my-kubeflow/ModelServing:/my_model seldonio/core-python-wrapper:0.7 /my_model testServing 0.1 seldonio
+
+ks pkg install kubeflow/seldon
+ks generate seldon seldon
+
+ks apply default -c seldon --namespace Kubeflow
+
+ks generate seldon-serve-simple testserving   \
+                                --name=mytestserving   \
+                                --image=rocketheat/testclassifier:0.3   \
+                                --namespace=kubeflow   \
+                                --replicas=1
+
+ks apply default -c testserving --namespace kubeflow
+
+kubectl port-forward $(kubectl get pods -n ${NAMESPACE} -l service=ambassador -o jsonpath='{.items[0].metadata.name}') -n ${NAMESPACE} 8080:80
+
+kubectl port-forward $(kubectl get pods -n kubeflow -l service=ambassador -o jsonpath='{.items[0].metadata.name}') -n kubeflow 8080:80
+
+curl -H "Content-Type: application/x-www-form-urlencoded" -d 'json={"data":{"tensor":{"shape":[1,2],"values":[1,3]}}}' http://localhost:8080/predict
