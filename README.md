@@ -199,7 +199,7 @@ ks apply default -c seldon --namespace Kubeflow
 ```
 
 Visualizing cluster details:
-![Cluster Details](./Images/Details.png)
+![Cluster Details](./Images/Detailed.png)
 
 Once you download seldon using ksonnet and through kubeflow you can build the docker image as follow (for further details check the following https://github.com/kubeflow/examples/tree/master/xgboost_ames_housing):
 1. Create a folder with three files: prediction file, the saved keras model, and requirements file. An example here is the Example_Folder where testServing is the prediction file, test_model.h5 is the saved keras model, and requirements.txt is the python library requirements.
