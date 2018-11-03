@@ -275,7 +275,7 @@ There is a powerful seldon core analytics that you can use to monitor perfomance
 
 You will need to download helm. You can get more details here: https://github.com/helm/helm
 
-``bash
+```bash
 brew install kubernetes-helm
 ```
 
