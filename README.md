@@ -279,8 +279,9 @@ You will need to download helm. You can get more details here: https://github.co
 brew install kubernetes-helm
 ```
 
-To download the dashboard you can follow the information here:
-```bashrc
+To download the dashboard you can follow the information here (https://github.com/SeldonIO/seldon-core/blob/master/docs/analytics.md):
+
+```bash
 helm install seldon-core-analytics --name seldon-core-analytics \
      --repo https://storage.googleapis.com/seldon-charts \
      --set grafana_prom_admin_password=password \
