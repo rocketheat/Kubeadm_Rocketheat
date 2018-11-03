@@ -128,6 +128,7 @@ export KUBECONFIG=~/Documents/Kubernetes/my-kubeflow/admin.conf
 
 You can use your computer instead of the master.
 
+### Download Ksonnet
 You will need ksonnet to help packaging your application.
 To download run the following (Mac):
 
@@ -137,6 +138,7 @@ brew install ksonnet/tap/ks
 for other operating systems check the following:
 https://github.com/ksonnet/ksonnet
 
+### Download Kubeflow
 Run the following to download kubeflow to make it easier to utilize machine learning tools over the cluster. For further details check the following: https://github.com/katacoda/kubeflow-ksonnet
 
 ```bash
@@ -180,6 +182,7 @@ ks param set kubeflow-core usageId $(uuidgen)
 ks apply default -c kubeflow-core
 ```
 
+### Starting Jupyter Hub
 Run the following codes to start jupyter hub
 
 ```bash
@@ -190,6 +193,7 @@ kubectl port-forward --namespace=${NAMESPACE} $PODNAME 8000:8000
 Visualizing Jupyter hub
 ![Jupyter Hub](./Images/JupyterHub.png)
 
+### Create Seldon Image
 To create the docker image you can use seldon wrapper using the ksonnet packaging system.
 
 ```bash
@@ -237,6 +241,7 @@ cd build
 ./push_image.sh
 ```
 
+### Adding Seldon Image to the Kubernetes Cluster and Testing it
 Once the image is pushed you need add it to your kubernetes cluster as follow
 
 ```bash
