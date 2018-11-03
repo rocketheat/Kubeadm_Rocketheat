@@ -193,7 +193,7 @@ kubectl port-forward --namespace=${NAMESPACE} $PODNAME 8000:8000
 Visualizing Jupyter hub
 ![Jupyter Hub](./Images/JupyterHub.png)
 
-### Create Seldon Image
+### Creating Seldon Image
 To create the docker image you can use seldon wrapper using the ksonnet packaging system.
 
 ```bash
