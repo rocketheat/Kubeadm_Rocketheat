@@ -84,6 +84,12 @@ export KUBECONFIG=$HOME/admin.conf
 echo "export KUBECONFIG=$HOME/admin.conf" | tee -a ~/.bashrc
 ```
 
+To use the master node as a Worker
+
+```bash
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
 Apply your pod network (flannel)
 
 ```bash
