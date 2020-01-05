@@ -314,3 +314,7 @@ unbind port already in use
 ```bash
 lsof -ti:8002 | xargs kill -9
 ```
+or
+```bash
+netstat -lnp | grep 1025
+```
